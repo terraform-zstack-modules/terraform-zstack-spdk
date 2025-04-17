@@ -116,9 +116,7 @@ components:
           type: string
           description: SSH password for connecting to the instance
           default: ZStack@123
-          format: password
           readOnly: true
-          writeOnly: true
           x-walrus-ui:
             group: Basic
             order: 14
