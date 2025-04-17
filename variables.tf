@@ -71,6 +71,13 @@ variable "instance_offering_uuid" {
   type        = string
 }
 
+variable "l3_network_uuids" {
+  type        = list(string)
+  description = "UUIDs of L3 networks (used if l3_network_name is not provided)"
+  default     = []
+}
+
+
 variable "aio_disk" {
   description = "Path to the AIO disk to use for iSCSI target"
   type        = string

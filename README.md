@@ -46,6 +46,7 @@
 | <a name="input_instance_offering_name"></a> [instance\_offering\_name](#input\_instance\_offering\_name) | Name of the instance offering to use | `string` | `"8C-16G"` | no |
 | <a name="input_instance_offering_uuid"></a> [instance\_offering\_uuid](#input\_instance\_offering\_uuid) | Uuid of the instance offering to use | `string` | n/a | yes |
 | <a name="input_l3_network_name"></a> [l3\_network\_name](#input\_l3\_network\_name) | Name of the L3 network to use | `string` | `"test"` | no |
+| <a name="input_l3_network_uuids"></a> [l3\_network\_uuids](#input\_l3\_network\_uuids) | UUIDs of L3 networks (used if l3\_network\_name is not provided) | `list(string)` | `[]` | no |
 | <a name="input_netmask"></a> [netmask](#input\_netmask) | Netmask for the iSCSI target | `string` | `"172.30.0.0/16"` | no |
 | <a name="input_node_base"></a> [node\_base](#input\_node\_base) | Base name for iSCSI target nodes | `string` | `"iqn.2016-06.io.spdk"` | no |
 | <a name="input_ssh_password"></a> [ssh\_password](#input\_ssh\_password) | SSH password for connecting to the instance | `string` | `"ZStack@123"` | no |

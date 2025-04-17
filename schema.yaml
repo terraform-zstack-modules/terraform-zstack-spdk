@@ -5,8 +5,6 @@ components:
   schemas:
     variables:
       type: object
-      required:
-      - instance_offering_uuid
       properties:
         image_name:
           title: 镜像名
@@ -71,6 +69,17 @@ components:
           x-walrus-ui:
             group: Basic
             order: 9
+        l3_network_uuids:
+          title: L3 Network Uuids
+          type: array
+          description: UUIDs of L3 networks (used if l3_network_name is not provided)
+          default: []
+          items:
+            type: string
+          x-walrus-ui:
+            colSpan: 12
+            group: Basic
+            order: 10
         aio_disk:
           title: 裸盘路径
           type: string
