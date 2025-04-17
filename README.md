@@ -34,6 +34,7 @@
 | <a name="input_aio_disk"></a> [aio\_disk](#input\_aio\_disk) | Path to the AIO disk to use for iSCSI target | `string` | `"/dev/sda"` | no |
 | <a name="input_backup_storage_name"></a> [backup\_storage\_name](#input\_backup\_storage\_name) | Name of the backup storage to use | `string` | `"bs"` | no |
 | <a name="input_context"></a> [context](#input\_context) | Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.<br/><br/>Examples:<pre>context:<br/>  project:<br/>    name: string<br/>    id: string<br/>  environment:<br/>    name: string<br/>    id: string<br/>  resource:<br/>    name: string<br/>    id: string</pre> | `map(any)` | `{}` | no |
+| <a name="input_data_disk_size"></a> [data\_disk\_size](#input\_data\_disk\_size) | data\_disk\_size for the iSCSI target | `number` | `100` | no |
 | <a name="input_expunge"></a> [expunge](#input\_expunge) | Whether to expunge the resources when destroyed | `bool` | `true` | no |
 | <a name="input_host_port"></a> [host\_port](#input\_host\_port) | Port for the iSCSI target | `number` | `3260` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | Name for the SPDK image | `string` | `"spdk-by-terraform"` | no |

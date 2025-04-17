@@ -28,6 +28,14 @@ module "spdk_instance" {
   l3_network_name        = var.l3_network_name
   instance_offering_name = var.instance_offering_name
   expunge                = var.expunge
+
+  data_disks = [
+    {
+      name           = "${var.instance_name}-data-disk-1"
+      description    = "Data disk for SPDK storage"
+      disk_size      = var.data_disk_size
+    }
+  ]
 }
 
 # 生成 iscsi_config 文件

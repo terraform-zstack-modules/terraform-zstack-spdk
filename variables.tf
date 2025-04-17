@@ -90,6 +90,12 @@ variable "netmask" {
   default     = "172.30.0.0/16"
 }
 
+variable "data_disk_size" {
+  description = "data_disk_size for the iSCSI target"
+  type        = number
+  default     = 100
+}
+
 variable "ssh_user" {
   description = "SSH username for connecting to the instance"
   type        = string

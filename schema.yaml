@@ -94,6 +94,14 @@ components:
           x-walrus-ui:
             group: Basic
             order: 12
+        data_disk_size:
+          title: 数据盘大小
+          type: number
+          description: data_disk_size for the iSCSI target  in gigabytes (GB)
+          default: 100
+          x-walrus-ui:
+            group: Basic
+            order: 13
         ssh_user:
           title: Ssh User
           type: string
@@ -108,7 +116,9 @@ components:
           type: string
           description: SSH password for connecting to the instance
           default: ZStack@123
+          format: password
           readOnly: true
+          writeOnly: true
           x-walrus-ui:
             group: Basic
             order: 14
