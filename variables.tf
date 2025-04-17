@@ -66,6 +66,11 @@ variable "instance_offering_name" {
   default     = "8C-16G"
 }
 
+variable "instance_offering_uuid" {
+  description = "Uuid of the instance offering to use"
+  type        = string
+}
+
 variable "aio_disk" {
   description = "Path to the AIO disk to use for iSCSI target"
   type        = string

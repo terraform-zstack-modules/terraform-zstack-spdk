@@ -17,16 +17,34 @@ module "spdk_image" {
   backup_storage_name = var.backup_storage_name
 }
 
-# 创建虚拟机实例
-module "spdk_instance" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-instance.git?ref=v1.1.1"
+data "zstack_l3networks" "l3networks" {
+  count = var.l3_network_name != null ? 1 : 0
+  name  = var.l3_network_name
+}
 
+data "zstack_instance_offers" "offers" {
+  count = var.instance_offering_name != null ? 1 : 0
+  name  = var.instance_offering_name
+}
+
+locals {
+  l3_network_uuids = var.l3_network_name != "" ? [data.zstack_l3networks.l3networks[0].l3networks[0].uuid] : var.l3_network_uuids
+
+  instance_offering_uuid = var.instance_offering_uuid != "" ? var.instance_offering_uuid : (
+    try(data.zstack_instance_offers.offers[0].instance_offers[0].uuid, "")
+  )
+}
+
+
+# 创建虚拟机实例
+resource "zstack_instance" "spdk_instance" {
   name                   = var.instance_name
   description            = "Created by Terraform devops"
-  instance_count         = 1
+  instance_offering_uuid = local.instance_offering_uuid != "" ? local.instance_offering_uuid : null
+  l3_network_uuids       = local.l3_network_uuids
+  never_stop             = var.never_stop
+
   image_uuid             = module.spdk_image.image_uuid
-  l3_network_name        = var.l3_network_name
-  instance_offering_name = var.instance_offering_name
   expunge                = var.expunge
 
   data_disks = [
@@ -43,7 +61,7 @@ resource "local_file" "iscsi_config" {
   content = templatefile("${path.module}/files/iscsi.json.tpl", {
     aio_disk  = var.aio_disk
     node_base = var.node_base
-    host_ip   = module.spdk_instance.instance_ips[0]
+    host_ip   = zstack_instance.spdk_instance.vm_nics[0].ip
     host_port = var.host_port
     netmask   = var.netmask
   })
@@ -53,11 +71,11 @@ resource "local_file" "iscsi_config" {
 
 # 上传 iscsi_config  文件到实例
 resource "terraform_data" "remote_exec" {
-  depends_on = [module.spdk_instance, local_file.iscsi_config]
+  depends_on = [zstack_instance.spdk_instance, local_file.iscsi_config]
 
   connection {
     type     = "ssh"
-    host     = module.spdk_instance.instance_ips[0]
+    host     = zstack_instance.spdk_instance.vm_nics[0].ip
     user     = var.ssh_user
     password = var.ssh_password
     timeout  = "5m"

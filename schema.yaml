@@ -5,6 +5,8 @@ components:
   schemas:
     variables:
       type: object
+      required:
+      - instance_offering_uuid
       properties:
         image_name:
           title: 镜像名
@@ -62,6 +64,13 @@ components:
           x-walrus-ui:
             group: Basic
             order: 8
+        instance_offering_uuid:
+          title: Instance Offering Uuid
+          type: string
+          description: Uuid of the instance offering to use
+          x-walrus-ui:
+            group: Basic
+            order: 9
         aio_disk:
           title: 裸盘路径
           type: string

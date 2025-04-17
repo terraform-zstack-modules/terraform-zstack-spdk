@@ -35,7 +35,7 @@ output "walrus_resource_id" {
 
 output "spdk_instance_ip" {
   description = "IP address of the created SPDK instance"
-  value       = module.spdk_instance.instance_ips[0]
+  value       = zstack_instance.spdk_instance.vm_nics[0].ip
 }
 
 
@@ -51,5 +51,5 @@ output "iscsi_target_port" {
 
 output "iscsi_connection_string" {
   description = "Connection string for the iSCSI target"
-  value       = "${var.node_base}:target1 @ ${module.spdk_instance.instance_ips[0]}:${var.host_port}"
+  value       = "${var.node_base}:target1 @ ${zstack_instance.spdk_instance.vm_nics[0].ip}:${var.host_port}"
 }

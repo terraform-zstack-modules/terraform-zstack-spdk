@@ -12,13 +12,13 @@
 |------|---------|
 | <a name="provider_local"></a> [local](#provider\_local) | n/a |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
+| <a name="provider_zstack"></a> [zstack](#provider\_zstack) | 1.0.8 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_spdk_image"></a> [spdk\_image](#module\_spdk\_image) | git::http://172.20.14.17/jiajian.chi/terraform-zstack-image.git | v1.1.1 |
-| <a name="module_spdk_instance"></a> [spdk\_instance](#module\_spdk\_instance) | git::http://172.20.14.17/jiajian.chi/terraform-zstack-instance.git | v1.1.1 |
 
 ## Resources
 
@@ -26,6 +26,9 @@
 |------|------|
 | [local_file.iscsi_config](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [terraform_data.remote_exec](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
+| [zstack_instance.spdk_instance](https://registry.terraform.io/providers/ZStack-Robot/zstack/1.0.8/docs/resources/instance) | resource |
+| [zstack_instance_offers.offers](https://registry.terraform.io/providers/ZStack-Robot/zstack/1.0.8/docs/data-sources/instance_offers) | data source |
+| [zstack_l3networks.l3networks](https://registry.terraform.io/providers/ZStack-Robot/zstack/1.0.8/docs/data-sources/l3networks) | data source |
 
 ## Inputs
 
@@ -41,6 +44,7 @@
 | <a name="input_image_url"></a> [image\_url](#input\_image\_url) | URL for the SPDK image | `string` | `"http://minio.zstack.io:9001/packer/spdk-by-packer-image-compressed.qcow2"` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name for the SPDK instance | `string` | `"spdk-iscsi"` | no |
 | <a name="input_instance_offering_name"></a> [instance\_offering\_name](#input\_instance\_offering\_name) | Name of the instance offering to use | `string` | `"8C-16G"` | no |
+| <a name="input_instance_offering_uuid"></a> [instance\_offering\_uuid](#input\_instance\_offering\_uuid) | Uuid of the instance offering to use | `string` | n/a | yes |
 | <a name="input_l3_network_name"></a> [l3\_network\_name](#input\_l3\_network\_name) | Name of the L3 network to use | `string` | `"test"` | no |
 | <a name="input_netmask"></a> [netmask](#input\_netmask) | Netmask for the iSCSI target | `string` | `"172.30.0.0/16"` | no |
 | <a name="input_node_base"></a> [node\_base](#input\_node\_base) | Base name for iSCSI target nodes | `string` | `"iqn.2016-06.io.spdk"` | no |
