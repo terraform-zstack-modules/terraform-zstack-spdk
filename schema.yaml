@@ -1,10 +1,117 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for template walrus-template-template
+  title: OpenAPI schema for template .
 components:
   schemas:
     variables:
       type: object
+      properties:
+        image_name:
+          title: 镜像名
+          type: string
+          description: SPDK-iSCSI 镜像名，可以保持默认
+          default: spdk-by-terraform
+          x-walrus-ui:
+            group: Basic
+            order: 2
+        image_url:
+          title: 镜像url
+          type: string
+          description: 除非你自己编译的SPDK镜像，否则请保持默认
+          default: http://minio.zstack.io:9001/packer/spdk-by-packer-image-compressed.qcow2
+          x-walrus-ui:
+            group: Basic
+            order: 3
+        expunge:
+          title: 是否永久删除
+          type: boolean
+          description: 开启永久删除，当卸载应用时候会永久删除虚机和镜像
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 4
+        backup_storage_name:
+          title: 镜像服务器名
+          type: string
+          description: 查找Cloud的镜像服务器名
+          default: bs
+          x-walrus-ui:
+            group: Basic
+            order: 5
+        instance_name:
+          title: SPDK虚机实例名
+          type: string
+          description: SPDK虚机实例名，可以保持默认
+          default: spdk-iscsi
+          x-walrus-ui:
+            group: Basic
+            order: 6
+        l3_network_name:
+          title: 三层网络名
+          type: string
+          description: 确保三层网络是公网可访问的
+          default: test
+          x-walrus-ui:
+            group: Basic
+            order: 7
+        instance_offering_name:
+          title: 计算规格
+          type: string
+          description: 实例计算规格，确保大于16G内存，以便运行SPDK
+          default: 8C-16G
+          x-walrus-ui:
+            group: Basic
+            order: 8
+        aio_disk:
+          title: 裸盘路径
+          type: string
+          description: iSCSI target裸盘路径，如果基于虚机并开启VirtioSCSI的话，一般为/dev/sda
+          default: /dev/sda
+          x-walrus-ui:
+            group: Basic
+            order: 9
+        node_base:
+          title: Node Base
+          type: string
+          description: Base name for iSCSI target nodes
+          default: iqn.2016-06.io.spdk
+          x-walrus-ui:
+            group: Basic
+            order: 10
+        host_port:
+          title: Host Port
+          type: number
+          description: Port for the iSCSI target
+          default: 3260
+          x-walrus-ui:
+            group: Basic
+            order: 11
+        netmask:
+          title: Netmask
+          type: string
+          description: Netmask for the iSCSI target
+          default: 172.30.0.0/16
+          x-walrus-ui:
+            group: Basic
+            order: 12
+        ssh_user:
+          title: Ssh User
+          type: string
+          description: SSH username for connecting to the instance
+          default: zstack
+          readOnly: true
+          x-walrus-ui:
+            group: Basic
+            order: 13
+        ssh_password:
+          title: Ssh Password
+          type: string
+          description: SSH password for connecting to the instance
+          default: ZStack@123
+          readOnly: true
+          x-walrus-ui:
+            group: Basic
+            order: 14
       x-walrus-ui:
         groupOrder:
         - Basic

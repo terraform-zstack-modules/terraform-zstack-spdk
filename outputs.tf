@@ -32,11 +32,24 @@ output "walrus_resource_id" {
   description = "The id of resource where deployed in Walrus."
 }
 
-#
-# Submodule output
-#
 
-output "submodule" {
-  value       = module.submodule.message
-  description = "The message from submodule."
+output "spdk_instance_ip" {
+  description = "IP address of the created SPDK instance"
+  value       = module.spdk_instance.instance_ips[0]
+}
+
+
+output "iscsi_target_base" {
+  description = "Base name of the iSCSI target"
+  value       = var.node_base
+}
+
+output "iscsi_target_port" {
+  description = "Port of the iSCSI target"
+  value       = var.host_port
+}
+
+output "iscsi_connection_string" {
+  description = "Connection string for the iSCSI target"
+  value       = "${var.node_base}:target1 @ ${module.spdk_instance.instance_ips[0]}:${var.host_port}"
 }
