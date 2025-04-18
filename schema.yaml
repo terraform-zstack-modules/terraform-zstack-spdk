@@ -69,6 +69,13 @@ components:
           x-walrus-ui:
             group: Basic
             order: 9
+        never_stop:
+          title: Never Stop
+          type: boolean
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 10
         l3_network_uuids:
           title: L3 Network Uuids
           type: array
@@ -120,6 +127,14 @@ components:
           x-walrus-ui:
             group: Basic
             order: 13
+        virtio_scsi:
+          title: Virtio Scsi
+          type: boolean
+          description: data_disk virtio enabled
+          default: false
+          x-walrus-ui:
+            group: Basic
+            order: 17
         ssh_user:
           title: Ssh User
           type: string

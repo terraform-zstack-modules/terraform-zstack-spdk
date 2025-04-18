@@ -34,7 +34,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aio_disk"></a> [aio\_disk](#input\_aio\_disk) | Path to the AIO disk to use for iSCSI target | `string` | `"/dev/sda"` | no |
+| <a name="input_aio_disk"></a> [aio\_disk](#input\_aio\_disk) | Path to the AIO disk to use for iSCSI target | `string` | `"/dev/vda"` | no |
 | <a name="input_backup_storage_name"></a> [backup\_storage\_name](#input\_backup\_storage\_name) | Name of the backup storage to use | `string` | `"bs"` | no |
 | <a name="input_context"></a> [context](#input\_context) | Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.<br/><br/>Examples:<pre>context:<br/>  project:<br/>    name: string<br/>    id: string<br/>  environment:<br/>    name: string<br/>    id: string<br/>  resource:<br/>    name: string<br/>    id: string</pre> | `map(any)` | `{}` | no |
 | <a name="input_data_disk_size"></a> [data\_disk\_size](#input\_data\_disk\_size) | data\_disk\_size for the iSCSI target | `number` | `100` | no |
@@ -48,9 +48,11 @@
 | <a name="input_l3_network_name"></a> [l3\_network\_name](#input\_l3\_network\_name) | Name of the L3 network to use | `string` | `"test"` | no |
 | <a name="input_l3_network_uuids"></a> [l3\_network\_uuids](#input\_l3\_network\_uuids) | UUIDs of L3 networks (used if l3\_network\_name is not provided) | `list(string)` | `[]` | no |
 | <a name="input_netmask"></a> [netmask](#input\_netmask) | Netmask for the iSCSI target | `string` | `"172.30.0.0/16"` | no |
+| <a name="input_never_stop"></a> [never\_stop](#input\_never\_stop) | n/a | `bool` | `true` | no |
 | <a name="input_node_base"></a> [node\_base](#input\_node\_base) | Base name for iSCSI target nodes | `string` | `"iqn.2016-06.io.spdk"` | no |
 | <a name="input_ssh_password"></a> [ssh\_password](#input\_ssh\_password) | SSH password for connecting to the instance | `string` | `"ZStack@123"` | no |
 | <a name="input_ssh_user"></a> [ssh\_user](#input\_ssh\_user) | SSH username for connecting to the instance | `string` | `"zstack"` | no |
+| <a name="input_virtio_scsi"></a> [virtio\_scsi](#input\_virtio\_scsi) | data\_disk virtio enabled | `bool` | `false` | no |
 
 ## Outputs
 

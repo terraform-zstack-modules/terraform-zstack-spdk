@@ -51,7 +51,8 @@ resource "zstack_instance" "spdk_instance" {
     {
       name           = "${var.instance_name}-data-disk-1"
       description    = "Data disk for SPDK storage"
-      disk_size      = var.data_disk_size
+      size           = var.data_disk_size
+      virtio_scsi    = var.virtio_scsi
     }
   ]
 }
@@ -83,16 +84,17 @@ resource "terraform_data" "remote_exec" {
 
   provisioner "file" {
     source      = "${path.module}/iscsi.json"
-    destination = "/root/iscsi.json"
+    destination = "/tmp/iscsi.json"
     on_failure  = fail
   }
 
   provisioner "remote-exec" {
     inline = [
+      "sudo mv /tmp/iscsi.json /root/iscsi.json",
       "echo 'Starting iscsi tgt ...'",
-      "nohup /root/spdk/build/bin/iscsi_tgt -c /root/iscsi.json > /var/log/iscsi_tgt.log 2>&1 &",
-      "sleep 5",
-      "ps aux | grep iscsi_tgt | grep -v grep || (echo 'Failed to start iscsi_tgt' && exit 1)",
+      "sudo nohup /root/spdk/build/bin/iscsi_tgt -c /root/iscsi.json > /tmp/iscsi_tgt.log 2>&1 &",
+      "sudo sleep 5",
+      "sudo ps aux | grep iscsi_tgt | grep -v grep || (echo 'Failed to start iscsi_tgt' && exit 1)",
       "echo 'iscsi_tgt started successfully'"
     ]
     on_failure = fail

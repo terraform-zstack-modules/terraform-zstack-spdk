@@ -71,6 +71,11 @@ variable "instance_offering_uuid" {
   type        = string
 }
 
+variable "never_stop" {
+  type        = bool
+  default     = true
+}
+
 variable "l3_network_uuids" {
   type        = list(string)
   description = "UUIDs of L3 networks (used if l3_network_name is not provided)"
@@ -81,7 +86,7 @@ variable "l3_network_uuids" {
 variable "aio_disk" {
   description = "Path to the AIO disk to use for iSCSI target"
   type        = string
-  default     = "/dev/sda"
+  default     = "/dev/vda"
 }
 
 variable "node_base" {
@@ -106,6 +111,12 @@ variable "data_disk_size" {
   description = "data_disk_size for the iSCSI target"
   type        = number
   default     = 100
+}
+
+variable "virtio_scsi" {
+  description = "data_disk virtio enabled"
+  type        = bool
+  default     = false
 }
 
 variable "ssh_user" {
